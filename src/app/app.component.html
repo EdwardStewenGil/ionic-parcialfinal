@@ -1,0 +1,43 @@
+<ion-app>
+
+  <ion-menu menuId="custom" contentId="main" class="my-custom-menu">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Custom Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <ion-item >
+            <ion-icon name="person">
+          </ion-icon>
+          <ion-label>{{userEmail}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+          <ion-item routerLink="/home">inicio</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle>
+        <ion-item routerLink="/combos">combos</ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item routerLink="/usuario">usuarios</ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <!-- <ion-icon name="cafe"></ion-icon> -->
+        <ion-item routerLink="/evento">
+         <ion-label>Cafeteria</ion-label> 
+        </ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle>
+        <ion-item (click)="logout()">salir</ion-item>
+      </ion-menu-toggle>
+      
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-app>

@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="mostrar1">
+  <form class="form" [formGroup]="validations_form" (ngSubmit)="loginUser(validations_form.value)">
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message"
+          *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
+      <ion-label position="floating" color="primary">Password</ion-label>
+      <ion-input type="password" formControlName="password" class="form-controll" required></ion-input>
+    </ion-item>
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message"
+          *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-button class="submit-btn" type="submit" [disabled]="!validations_form.valid">Log In</ion-button>
+
+    <label class="error-message">{{errorMessage}}</label>
+  </form>
+  <p class="go-to-register">
+    No account yet? <a (click)="goToRegisterPage()">Create an account.</a>
+  </p>
+</div >
+<div *ngIf="mostrar2">
+
+  <ion-card *ngFor="let item of usuarios">
+    <span >
+      <ion-card-header>
+        <ion-card-title>Bienvenido a nuestra aplicacion UNIAJC</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>nombre: {{item.nombre}}</ion-card-subtitle>
+        <ion-card-subtitle>rol: {{item.rol}}</ion-card-subtitle>
+
+
+        
+        <ion-button shape="round"  type="boolean" color="secondary" size="small" (click)="bienvenido(item)">
+        aceptar
+ 
+        </ion-button>
+      </ion-card-content>
+    </span>
+    
+  </ion-card>
+
+
+
+</div>
+
+</ion-content>

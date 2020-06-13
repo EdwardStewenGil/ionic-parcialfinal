@@ -1,0 +1,245 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestion Usuarios</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="custom"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div *ngIf="mostrar2">
+  <ion-button shape="round" color="secondary" size="small" (click)="mostrar1=true" (click)="mostrar2=false"  (click)="mostrar3=false">Registrar Usuario</ion-button>
+</div>
+  <div *ngIf="mostrar1">
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="nombre" aria-required="true" [(ngModel)]="nombre"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+      <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="apellido" [(ngModel)]="apellido"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+      <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="facultad " [(ngModel)]="facultad"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+        <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="correo " type="email" [(ngModel)]="correo"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="password" type="password" minlength="5"
+          [(ngModel)]="password"></ion-input>
+        </ion-item>
+       
+      
+    
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="sede" [(ngModel)]="sede"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-select placeholder="rol" [(ngModel)]="rol">
+            <ion-select-option>Docente</ion-select-option>
+            <ion-select-option>Estudiante</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-input placeholder="estado" [(ngModel)]="estado"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  
+
+    <ion-row>
+      <ion-col text-center>
+        <ion-button (click)="CreateRecord()"  (click)="mostrar1=false" (click)="mostrar2=true"  (click)="mostrar3=true" [disabled]="!nombre || !apellido || !correo || !facultad
+        || !sede || !rol || !estado  ">
+          Registrar Usuario
+        </ion-button>
+
+        
+      </ion-col>
+    </ion-row>
+    <ion-button shape="round" color="secondary" size="small" (click)="mostrar1=false" (click)="mostrar2=true"  (click)="mostrar3=true">cancelar</ion-button>
+
+  </ion-grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+  
+<div *ngIf="mostrar3">
+ 
+  <ion-card *ngFor="let item of Usuarios">
+    <span *ngIf="!item.isEdit; else elseBlock">
+      <ion-card-header>
+        <ion-card-title>{{item.nombre}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>apellido: {{item.apellido}}</ion-card-subtitle>
+        <ion-card-subtitle>facultad: {{item.facultad}}</ion-card-subtitle>
+        <ion-card-subtitle>rol: {{item.rol}}</ion-card-subtitle>
+        <ion-card-subtitle>sede: {{item.sede}}</ion-card-subtitle> 
+        <ion-card-subtitle>estado: {{item.estado}}</ion-card-subtitle>  
+ 
+        
+
+        <ion-button shape="round" color="secondary" size="small" (click)="EditRecord(item)">
+          <ion-icon size="small" slot="icon-only" name="create"></ion-icon>
+ 
+        </ion-button>
+        <ion-button shape="round" color="danger" size="small" (click)="RemoveRecord(item.id)">
+          <ion-icon size="small" slot="icon-only" name="trash"></ion-icon>
+ 
+        </ion-button>
+      </ion-card-content>
+    </span>
+    <ng-template #elseBlock>
+      <ion-card-header>
+        <ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Editar
+              </ion-col>
+              <ion-col>
+                <ion-button fill="clear" color="medium" size="small" (click)="item.isEdit = false">
+                  Cancelar
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button fill="outline" color="success" size="small" (click)="UpdateRecord(item)">
+                  Actualizar
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-title>
+      </ion-card-header>
+
+      
+      <ion-card-content>
+        <ion-item>
+          <ion-label><strong>Nombre</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditNombre"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Apellido</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditApellido"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Facultad</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditFacultad"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Correo</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditCorreo"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Sede</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditSede"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>Rol</strong></ion-label>
+       
+          <ion-select placeholder="rol" [(ngModel)]="item.EditRol">
+            <ion-select-option>Docente</ion-select-option>
+            <ion-select-option>Estudiante</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label><strong>estado</strong></ion-label>
+          <ion-input type="text" [(ngModel)]="item.EditEstado"></ion-input>
+        </ion-item>
+    
+    
+      </ion-card-content>
+    </ng-template>
+  </ion-card>
+</div>
+
+</ion-content>

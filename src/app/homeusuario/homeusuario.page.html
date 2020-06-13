@@ -1,0 +1,89 @@
+<ion-menu menuId="custom" contentId="main" class="my-custom-menu">
+  <ion-header>
+    <ion-toolbar color="tertiary">
+      <ion-title>Custom Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle>
+        <ion-item >
+          <ion-icon name="person">
+        </ion-icon>
+        <ion-label>{{userEmail}}</ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+        <ion-item routerLink="/home">inicio</ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle>
+      <ion-item routerLink="/combos">combos</ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <ion-item routerLink="/usuario">usuarios</ion-item>
+    </ion-menu-toggle>
+    <ion-menu-toggle>
+      <!-- <ion-icon name="cafe"></ion-icon> -->
+      <ion-item routerLink="/evento">
+       <ion-label>Cafeteria</ion-label> 
+      </ion-item>
+    </ion-menu-toggle>
+
+    <ion-menu-toggle>
+      <ion-item (click)="logout()">salir</ion-item>
+    </ion-menu-toggle>
+    
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+ <ion-button  color="secondary" size="small" (click)="real1()">
+        combo 
+ 
+ </ion-button>  <ion-button   color="secondary" size="small" (click)="real2()">
+          qr 
+   
+ </ion-button>  <ion-button    color="secondary" size="small" (click)="real3(item)">
+            mapa 
+     
+         
+ </ion-button>  <ion-button color="secondary" size="small" (click)="logout()">
+            salir 
+     
+ </ion-button>
+            
+    </ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+ 
+  <ion-card *ngFor="let item of Combo">
+    <span >
+      <ion-card-header>
+        <ion-card-title>{{item.nombre}}</ion-card-title>
+
+        <ion-img [src]="item.imagen"></ion-img>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>descripcion: {{item.descripcion}}</ion-card-subtitle>
+        <ion-card-subtitle>precio: {{item.precio}}</ion-card-subtitle>
+        <ion-card-subtitle>cafeteria: {{item.cafeteria}}</ion-card-subtitle>
+
+        
+        <ion-button shape="round"  type="boolean" color="secondary" size="small" (click)="mandarEvento(item)">
+        Reservar 
+ 
+        </ion-button>
+      </ion-card-content>
+    </span>
+    
+  </ion-card>
+
+
+</ion-content>
