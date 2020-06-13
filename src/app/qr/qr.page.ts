@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { AuthenticateService } from 'src/app/services/authentication.service';
+import {
+  BarcodeScannerOptions,
+  BarcodeScanner
+} from "@ionic-native/barcode-scanner/ngx";
 
 
 
@@ -11,7 +15,12 @@ import { AuthenticateService } from 'src/app/services/authentication.service';
 })
 export class QrPage implements OnInit {
 
-  constructor(private navCtrl :NavController, private  authService : AuthenticateService) { }
+  constructor(private navCtrl :NavController, private  authService : AuthenticateService,private barcodeScanner: BarcodeScanner) { this.encodeData = "https://www.FreakyJolly.com";
+  //Options
+  this.barcodeScannerOptions = {
+    showTorchButton: true,
+    showFlipCameraButton: true
+  }; }
 
   ngOnInit() {
   }
@@ -36,4 +45,36 @@ export class QrPage implements OnInit {
       })
   }
 
+
+  encodeData: any;
+  scannedData: {};
+  barcodeScannerOptions: BarcodeScannerOptions;
+
+
+
+  scanCode() {
+    this.barcodeScanner
+      .scan()
+      .then(barcodeData => {
+        alert("Barcode data " + JSON.stringify(barcodeData));
+        this.scannedData = barcodeData;
+      })
+      .catch(err => {
+        console.log("Error", err);
+      });
+  }
+
+  encodedText() {
+    this.barcodeScanner
+      .encode(this.barcodeScanner.Encode.TEXT_TYPE, this.encodeData)
+      .then(
+        encodedData => {
+          console.log(encodedData);
+          this.encodeData = encodedData;
+        },
+        err => {
+          console.log("Error occured : " + err);
+        }
+      );
+  }
 }

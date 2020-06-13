@@ -21,6 +21,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1>click para escanear tu codigo qr</h1>
+
+  <ion-button color="primary" (click)="scanCode()">
+scanear  </ion-button>
+
 
 </ion-content>
